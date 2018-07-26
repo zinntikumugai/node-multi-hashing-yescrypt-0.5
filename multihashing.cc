@@ -12,6 +12,8 @@ extern "C" {
     #include "scryptn.h"
     #include "yescrypt/yescrypt.h"
     #include "yescrypt/sha256.h"
+    #include "yespower/yespower.h"
+    #include "yespower/sha256.h"
     #include "skein.h"
     #include "x11.h"
     #include "groestl.h"
@@ -25,7 +27,7 @@ extern "C" {
     #include "nist5.h"
     #include "sha1.h"
     #include "x15.h"
-	#include "fresh.h"
+    #include "fresh.h"
 }
 
 #include "boolberry.h"
