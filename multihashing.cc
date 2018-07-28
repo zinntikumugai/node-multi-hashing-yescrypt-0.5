@@ -214,7 +214,7 @@ void yespower(const FunctionCallbackInfo<Value>& args) {
    char* output = new char[32];
 
    
-   yespower_hash(input, output, input_len);
+   yespower_hash(input, output, uint32_t len);
 
    Local<Object> buff = Nan::NewBuffer(output, 32).ToLocalChecked();
    args.GetReturnValue().Set(buff);
