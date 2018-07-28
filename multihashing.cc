@@ -3,7 +3,7 @@
 #include <node_buffer.h>
 #include <v8.h>
 #include <stdint.h>
-void yespower_hash( const char *input, char *output);
+
 extern "C" {
     #include "bcrypt.h"
     #include "keccak.h"
@@ -34,6 +34,8 @@ extern "C" {
 
 using namespace node;
 using namespace v8;
+
+void yespower_hash( const char *input, char *output);
 
 void except(const char* msg) {
 	Isolate* isolate = Isolate::GetCurrent();
@@ -212,8 +214,6 @@ void yespower(const FunctionCallbackInfo<Value>& args) {
    
    char * input = Buffer::Data(target);
    char* output = new char[32];
-
-   uint32_t input_len = Buffer::Length(target);
    
    yespower_hash(input, output);
 
