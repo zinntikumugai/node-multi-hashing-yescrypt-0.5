@@ -11,8 +11,9 @@
 		"yescrypt/yescrypt.c",
 		"yespower/yespower.h",
 		"yespower/sha256.h",
-		"yespower/yespower-opt.c"
-		"yespower/yespower-ref.c"
+		"yespower/sha256.c",
+		"yespower/yespower-opt.c",
+		"yespower/yespower-ref.c",
                 "keccak.c",
                 "skein.c",
                 "x11.c",
