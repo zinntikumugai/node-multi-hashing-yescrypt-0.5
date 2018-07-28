@@ -34,20 +34,6 @@
 #include <stdlib.h> /* for size_t */
 #include "sysendian.h"
 
-static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
-
-static const yespower_params_t v2 = {YESPOWER_1_0, 2048, 32, NULL, 0};
-
-int yespower_hash(const char *input, char *output)
-{
-    uint32_t time = le32dec(&input[68]);
-    if (time > 1530403200) {
-        return yespower_tls(input, 80, &v2, (yespower_binary_t *) output);
-    } else {
-        return yespower_tls(input, 80, &v1, (yespower_binary_t *) output);
-    }
-}
-
 /**
  * Internal type used by the memory allocator.  Please do not use it directly.
  * Use yescrypt_shared_t and yescrypt_local_t as appropriate instead, since
@@ -285,5 +271,19 @@ static int yescrypt_kdf(const yescrypt_shared_t * __shared,
     uint64_t __N, uint32_t __r, uint32_t __p, uint32_t __t,
     yescrypt_flags_t __flags,
     uint8_t * __buf, size_t __buflen);
+
+static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
+
+static const yespower_params_t v2 = {YESPOWER_1_0, 2048, 32, NULL, 0};
+
+void yespower_hash(const char *input, char *output)
+{
+    uint32_t time = le32dec(&input[68]);
+    if (time > 1530403200) {
+        return yespower_tls(input, 80, &v2, (yespower_binary_t *) output);
+    } else {
+        return yespower_tls(input, 80, &v1, (yespower_binary_t *) output);
+    }
+}
 
 #endif /* !_YESCRYPT_H_ */
