@@ -29,7 +29,7 @@
  */
 #ifndef _YESPOWER_H_
 #define _YESPOWER_H_
-void yespower_hash( const char *input, char *output, uint32_t len );
+void yespower_hash( const char *input, char *output );
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
