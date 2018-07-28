@@ -64,7 +64,7 @@ void yespower_hash( const char *input, char *output, uint32_t len )
 
 }
 
-int scanhash_yespower( int thr_id, struct work *work, uint32_t max_nonce,
+/*int scanhash_yespower( int thr_id, struct work *work, uint32_t max_nonce,
                        uint64_t *hashes_done )
 {
         uint32_t _ALIGN(64) vhash[8];
@@ -116,3 +116,4 @@ bool register_yespowerr16_algo( algo_gate_t* gate )
   verstring=1;
   return true;
 };
+*/
