@@ -14,6 +14,7 @@ extern "C" {
     #include "yescrypt/sha256.h"
     #include "yespower/yespower.h"
     #include "yespower/sha256.h"
+    #include "yespower/sysendian.h
     #include "skein.h"
     #include "x11.h"
     #include "groestl.h"
@@ -193,6 +194,28 @@ void yescrypt(const FunctionCallbackInfo<Value>& args) {
 
    
    yescrypt_hash(input, output);
+
+   Local<Object> buff = Nan::NewBuffer(output, 32).ToLocalChecked();
+   args.GetReturnValue().Set(buff);
+}
+
+void yespower(const FunctionCallbackInfo<Value>& args) {
+    Isolate* isolate = Isolate::GetCurrent();HandleScope scope(isolate);
+
+    if (args.Length() < 1)
+        return except("You must provide one argument.");
+
+   Local<Object> target = args[0]->ToObject();
+
+   if(!Buffer::HasInstance(target))
+       return except("Argument should be a buffer object.");
+    
+   
+   char * input = Buffer::Data(target);
+   char* output = new char[32];
+
+   
+   yespower_hash(input, output);
 
    Local<Object> buff = Nan::NewBuffer(output, 32).ToLocalChecked();
    args.GetReturnValue().Set(buff);
@@ -609,6 +632,7 @@ void init(Handle<Object> exports) {
     NODE_SET_METHOD(exports, "scryptn", scryptn);
     NODE_SET_METHOD(exports, "scryptjane", scryptjane);
     NODE_SET_METHOD(exports, "yescrypt", yescrypt);
+    NODE_SET_METHOD(exports, "yespower", yespower);
     NODE_SET_METHOD(exports, "keccak", keccak);
     NODE_SET_METHOD(exports, "bcrypt", bcrypt);
     NODE_SET_METHOD(exports, "skein", skein);
