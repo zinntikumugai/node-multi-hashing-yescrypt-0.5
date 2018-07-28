@@ -27,12 +27,17 @@
  * coin.
  */
 #include "yespower.h"
-#include "sysendian.h"
+//#include "sysendian.h"
 
-static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
+#include "algo-gate-api.h"
 
-static const yespower_params_t v2 = {YESPOWER_0_9, 2048, 32, NULL, 0};
+int verstring;
 
+//static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
+
+//static const yespower_params_t v2 = {YESPOWER_0_9, 2048, 32, NULL, 0};
+
+/*
 int yespower_hash(const char *input, char *output)
 {
     uint32_t time = le32dec(&input[68]);
@@ -41,4 +46,73 @@ int yespower_hash(const char *input, char *output)
     } else {
         return yespower_tls(input, 80, &v1, (yespower_binary_t *) output);
     }
+};
+*/
+
+void yespower_hash( const char *input, char *output, uint32_t len )
+{
+   if (verstring==1)
+   { 
+		static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
+		yespower_tls( (yespower_binary_t*)input, len, &v1, (yespower_binary_t*)output ); 
+	}
+   if (verstring==2)
+   {
+	   static const yespower_params_t v2 = {YESPOWER_0_9, 2048, 32, NULL, 0};
+	   yespower_tls( (yespower_binary_t*)input, len, &v2, (yespower_binary_t*)output ); 
+	}
+
 }
+
+int scanhash_yespower( int thr_id, struct work *work, uint32_t max_nonce,
+                       uint64_t *hashes_done )
+{
+        uint32_t _ALIGN(64) vhash[8];
+        uint32_t _ALIGN(64) endiandata[20];
+        uint32_t *pdata = work->data;
+        uint32_t *ptarget = work->target;
+
+        const uint32_t Htarg = ptarget[7];
+        const uint32_t first_nonce = pdata[19];
+        uint32_t n = first_nonce;
+
+        for (int k = 0; k < 19; k++)
+                be32enc(&endiandata[k], pdata[k]);
+
+        do {
+                be32enc(&endiandata[19], n);
+                yespower_hash((char*) endiandata, (char*) vhash, 80);
+                if (vhash[7] < Htarg && fulltest(vhash, ptarget)) {
+                        work_set_target_ratio( work, vhash );
+                        *hashes_done = n - first_nonce + 1;
+                        pdata[19] = n;
+                        return true;
+                }
+                n++;
+        } while (n < max_nonce && !work_restart[thr_id].restart);
+
+        *hashes_done = n - first_nonce + 1;
+        pdata[19] = n;
+
+        return 0;
+}
+
+bool register_yespower_algo( algo_gate_t* gate )
+{
+  gate->optimizations = SSE2_OPT | SHA_OPT;
+  gate->scanhash   = (void*)&scanhash_yespower;
+  gate->hash      = (void*)&yespower_hash;
+  gate->set_target = (void*)&scrypt_set_target;
+  verstring=2;
+  return true;
+};
+
+bool register_yespowerr16_algo( algo_gate_t* gate )
+{
+  gate->optimizations = SSE2_OPT | SHA_OPT;
+  gate->scanhash   = (void*)&scanhash_yespower;
+  gate->hash      = (void*)&yespower_hash;
+  gate->set_target = (void*)&scrypt_set_target;
+  verstring=1;
+  return true;
+};

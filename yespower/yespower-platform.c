@@ -18,7 +18,7 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __unix__
+#ifdef MAP_ANON
 #include <sys/mman.h>
 #endif
 
