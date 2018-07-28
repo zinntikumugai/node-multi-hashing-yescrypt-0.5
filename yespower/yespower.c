@@ -29,7 +29,7 @@
 #include "yespower.h"
 //#include "sysendian.h"
 
-#include "algo-gate-api.h"
+//#include "algo-gate-api.h"
 
 int verstring;
 
