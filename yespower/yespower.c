@@ -31,7 +31,7 @@
 
 //#include "algo-gate-api.h"
 
-int verstring;
+//int verstring;
 
 //static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
 
