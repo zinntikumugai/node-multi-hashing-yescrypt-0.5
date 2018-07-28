@@ -33,7 +33,7 @@
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
-void yespower_hash(const char *input, char *output)
+void yespower_hash(const char *input, char *output);
 
 #ifdef __cplusplus
 extern "C" {
