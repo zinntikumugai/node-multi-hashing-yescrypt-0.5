@@ -33,10 +33,6 @@
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * Internal type used by the memory allocator.  Please do not use it directly.
  * Use yespower_local_t instead.
@@ -122,9 +118,5 @@ extern int yespower(yespower_local_t *local,
  */
 extern int yespower_tls(const uint8_t *src, size_t srclen,
     const yespower_params_t *params, yespower_binary_t *dst);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* !_YESPOWER_H_ */
