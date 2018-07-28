@@ -12,7 +12,7 @@
 		"yespower/yespower.h",
 		"yespower/sha256.h",
 		"yespower/yespower-opt.c"
-		"yespower-ref.c"
+		"yespower/yespower-ref.c"
                 "keccak.c",
                 "skein.c",
                 "x11.c",
