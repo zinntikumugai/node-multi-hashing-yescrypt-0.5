@@ -12,7 +12,6 @@ extern "C" {
     #include "scryptn.h"
     #include "yescrypt/yescrypt.h"
     #include "yescrypt/sha256.h"
-    #include "yespower/yespower.c"
     #include "yespower/yespower.h"
     #include "yespower/sha256.h"
     #include "skein.h"
