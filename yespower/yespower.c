@@ -2,7 +2,7 @@
 
 int verstring;
 
-void yespower_hash( const char *input, char *output, uint32_t len )
+void yespower_hash( const char *input, char *output)
 {
    if (verstring==1)
    { 
