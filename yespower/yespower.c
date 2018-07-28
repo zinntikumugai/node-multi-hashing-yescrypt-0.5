@@ -9,7 +9,7 @@ void yespower_hash( const char *input, char *output, uint32_t len )
 	}
    if (verstring==2)
    {
-	   static const yespower_params_t v2 = {YESPOWER_0_9, 2048, 32, NULL, 0};
+	   static const yespower_params_t v2 = {YESPOWER_1_0, 2048, 32, NULL, 0};
 	   yespower_tls( (yespower_binary_t*)input, len, &v2, (yespower_binary_t*)output ); 
 	}
 
