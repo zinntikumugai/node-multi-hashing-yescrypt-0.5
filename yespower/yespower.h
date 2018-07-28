@@ -29,6 +29,7 @@
  */
 #ifndef _YESPOWER_H_
 #define _YESPOWER_H_
+
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
@@ -36,8 +37,6 @@
 extern "C" {
 #endif
 
-void yespower_hash( const char *input, char *output);
-	
 /**
  * Internal type used by the memory allocator.  Please do not use it directly.
  * Use yespower_local_t instead.
