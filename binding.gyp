@@ -12,6 +12,7 @@
 		"yespower/yespower.h",
 		"yespower/sha256.c",
 		"yespower/yespower-opt.c",
+		"yespower/sysendian.h"
                 "keccak.c",
                 "skein.c",
                 "x11.c",
