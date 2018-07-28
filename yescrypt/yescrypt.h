@@ -30,6 +30,8 @@
 #ifndef _YESCRYPT_H_
 #define _YESCRYPT_H_
 
+void yescrypt_hash(const char *input, char *output);
+
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
