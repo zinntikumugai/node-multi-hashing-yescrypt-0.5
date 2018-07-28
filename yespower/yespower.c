@@ -4,7 +4,7 @@
 static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
 
 static const yespower_params_t v2 = {YESPOWER_1_0, 2048, 32, NULL, 0};
-void yespower_hash(const char *input, char *output);
+
 int yespower_hash(const char *input, char *output)
 {
     uint32_t time = le32dec(&input[68]);
