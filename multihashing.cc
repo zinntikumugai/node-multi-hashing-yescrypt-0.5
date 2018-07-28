@@ -3,7 +3,7 @@
 #include <node_buffer.h>
 #include <v8.h>
 #include <stdint.h>
-
+void yespower_hash( const char *input, char *output);
 extern "C" {
     #include "bcrypt.h"
     #include "keccak.h"
