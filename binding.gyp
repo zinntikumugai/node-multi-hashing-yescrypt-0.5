@@ -10,7 +10,7 @@
                 "yescrypt/yescrypt-best.c.h",
 		"yescrypt/yescrypt.c",
 		"yespower/yespower.h",
-		"yespower/sha256.h",
+		"yespower/sha256.c",
                 "keccak.c",
                 "skein.c",
                 "x11.c",
